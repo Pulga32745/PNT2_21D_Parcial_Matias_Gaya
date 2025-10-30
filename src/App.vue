@@ -1,47 +1,58 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div class="container mt-5">
+    <h2 class="mb-4">Conversor de Temperatura</h2>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <div class="form-group">
+      <label for="tempC">Ingrese Temperatura °C:</label>
+      <input
+        id="tempC"
+        type="number"
+        class="form-control w-25"
+        v-model.number="celsius"
+      />
     </div>
-  </header>
 
-  <main>
-    <TheWelcome />
-  </main>
+    <p :style="{ color: colorTexto }">
+      Conv. Temperatura °F: {{ fahrenheit }}
+    </p>
+
+    <p :style="{ color: colorTexto }">
+      Conv. Temperatura °K: {{ kelvin }}
+    </p>
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<script>
+export default {
+  name: "App",
+  data() {
+    return {
+      celsius: 0
+    };
+  },
+  computed: {
+    fahrenheit() {
+      return ((this.celsius * 9) / 5 + 32).toFixed(2);
+    },
+    kelvin() {
+      return (this.celsius + 273.15).toFixed(2);
+    },
+    colorTexto() {
+      if (this.celsius <= 0) return "blue";
+      else if (this.celsius < 15) return "magenta";
+      else return "red";
+    }
+  }
+};
+</script>
+
+<style>
+body {
+  background-color: #f8f9fa;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+h2 {
+  font-weight: bold;
 }
 </style>
+
+
