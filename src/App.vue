@@ -19,6 +19,8 @@
     <p :style="{ color: colorTexto }">
       Conv. Temperatura °K: {{ kelvin }}
     </p>
+
+    <p>Respuestas Multiple Choice: 1:C - 2:C - 3:A</p>
   </div>
 </template>
 
